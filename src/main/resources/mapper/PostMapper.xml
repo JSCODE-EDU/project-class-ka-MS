@@ -22,6 +22,17 @@
     <select id="selectPostList" resultType="com.jscode.minseok.domain.Post">
         SELECT id, title, content, createdat
         FROM Post
+        ORDER BY createdat DESC
+        LIMIT 100;
+    </select>
+
+    <!--게시글 검색-->
+    <select id="selectPostsByTitleContaining" parameterType="string" resultType="com.jscode.minseok.domain.Post">
+        SELECT id, title, content, createdat
+        FROM Post
+        WHERE title like CONCAT('%', #{value}, '%')
+        ORDER BY createdat DESC
+        LIMIT 100;
     </select>
 
     <!--게시글 수정-->

@@ -30,9 +30,14 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PostResponseDTO>> postList(){
-        List<PostResponseDTO> postList = postService.selectPostList();
-        return new ResponseEntity<>(postList, HttpStatus.OK);
+    public List<PostResponseDTO> postList(){
+        return postService.selectPostList();
+    }
+    
+    // 검색어를 받는 domain을 추가해 줘야 하는게 맞는지 모르겠다. api 규격도 이렇게 하는게 맞는지 모르겠음
+    @GetMapping("/search") // /search?title=검색어
+    public List<PostResponseDTO> searchPostsByTitle(@RequestParam String title){
+        return postService.selectPostsByTitleContaining(title);
     }
 
     @PutMapping("/{id}")

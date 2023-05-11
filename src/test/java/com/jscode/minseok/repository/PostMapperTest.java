@@ -1,8 +1,6 @@
 package com.jscode.minseok.repository;
 
 import com.jscode.minseok.domain.Post;
-import com.jscode.minseok.dto.PostRequestDTO;
-import com.jscode.minseok.dto.PostResponseDTO;
 import com.jscode.minseok.mapper.PostMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +42,15 @@ class PostMapperTest {
     void deleteBoard() {
         postMapper.deletePost(1L);
     }
+
+    @Test
+    void selectPostsByTitleContaining() {
+        String title = "t";
+        List<Post> a = postMapper.selectPostsByTitleContaining("t");
+        System.out.println(a.size()+"개");
+        for(Post post : a) {
+            System.out.println(post);
+        }
+    }
+
 }

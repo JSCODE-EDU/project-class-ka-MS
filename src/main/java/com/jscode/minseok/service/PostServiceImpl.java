@@ -71,6 +71,17 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<PostResponseDTO> selectPostsByTitleContaining(String title) {
+        List<Post> pList = postMapper.selectPostsByTitleContaining(title);
+        return pList.stream().map(post -> new PostResponseDTO(
+                post.getId(),
+                post.getTitle(),
+                post.getContent(),
+                post.getCreatedat()
+        )).collect(Collectors.toList());
+    }
+
+    @Override
     public void deletePost(Long id) {
         postMapper.deletePost(id);
     }

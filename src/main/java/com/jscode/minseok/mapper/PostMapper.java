@@ -18,4 +18,7 @@ public interface PostMapper {
     void updatePost(Post post);
 
     void deletePost(Long id);
+
+    List<Post> selectPostsByTitleContaining(String title);
+
 }

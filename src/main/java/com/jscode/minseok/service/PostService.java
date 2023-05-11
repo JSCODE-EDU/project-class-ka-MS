@@ -16,5 +16,7 @@ public interface PostService {
 
     PostResponseDTO updatePost(Long id, PostRequestDTO postRequestDTO);
 
+    List<PostResponseDTO> selectPostsByTitleContaining(String title);
+
     void deletePost(Long id);
 }
