@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jscode.minseok.mapper.BoardMapper">
+
+    <!--게시글 등록-->
+    <insert id="insertBoard" parameterType="com.jscode.minseok.dto.BoardRequestDTO">
+        INSERT INTO board (title, content)
+        VALUES (#{title}, #{content})
+    </insert>
+
+    <!--게시글 상세조회-->
+    <select id="selectBoard" parameterType="long" resultType="com.jscode.minseok.dto.BoardResponseDTO">
+        SELECT id, title, content, createdat
+        FROM board
+        WHERE id = #{value};
+    </select>
+
+    <!--게시글 전체 조회-->
+    <select id="selectBoardList" resultType="com.jscode.minseok.dto.BoardResponseDTO">
+        SELECT id, title, content, createdat
+        FROM board
+    </select>
+
+    <!--게시글 수정-->
+    <update id="updateBoard" parameterType="com.jscode.minseok.dto.BoardResponseDTO">
+        UPDATE board
+        SET title = #{title}, content = #{content}
+        WHERE id = #{id};
+    </update>
+
+    <!--게시글 삭제-->
+    <delete id="deleteBoard" parameterType="long">
+        DELETE FROM board
+               WHERE id = #{value}
+    </delete>
+</mapper>
