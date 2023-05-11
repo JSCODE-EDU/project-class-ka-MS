@@ -3,37 +3,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jscode.minseok.mapper.BoardMapper">
+<mapper namespace="com.jscode.minseok.mapper.PostMapper">
 
     <!--게시글 등록-->
-    <insert id="insertBoard" parameterType="com.jscode.minseok.dto.BoardRequestDTO">
-        INSERT INTO board (title, content)
+    <insert id="insertPost" parameterType="com.jscode.minseok.domain.Post" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO Post (title, content)
         VALUES (#{title}, #{content})
     </insert>
 
     <!--게시글 상세조회-->
-    <select id="selectBoard" parameterType="long" resultType="com.jscode.minseok.dto.BoardResponseDTO">
+    <select id="selectPost" parameterType="long" resultType="com.jscode.minseok.domain.Post">
         SELECT id, title, content, createdat
-        FROM board
+        FROM Post
         WHERE id = #{value};
     </select>
 
     <!--게시글 전체 조회-->
-    <select id="selectBoardList" resultType="com.jscode.minseok.dto.BoardResponseDTO">
+    <select id="selectPostList" resultType="com.jscode.minseok.domain.Post">
         SELECT id, title, content, createdat
-        FROM board
+        FROM Post
     </select>
 
     <!--게시글 수정-->
-    <update id="updateBoard" parameterType="com.jscode.minseok.dto.BoardResponseDTO">
-        UPDATE board
+    <update id="updatePost" parameterType="com.jscode.minseok.domain.Post">
+        UPDATE Post
         SET title = #{title}, content = #{content}
         WHERE id = #{id};
     </update>
 
     <!--게시글 삭제-->
-    <delete id="deleteBoard" parameterType="long">
-        DELETE FROM board
+    <delete id="deletePost" parameterType="long">
+        DELETE FROM Post
                WHERE id = #{value}
     </delete>
 </mapper>
