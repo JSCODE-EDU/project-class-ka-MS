@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jscode.minseok.mapper.PostMapper">
+
+    <!--게시글 등록-->
+    <insert id="insertPost" parameterType="com.jscode.minseok.domain.Post" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO Post (title, content)
+        VALUES (#{title}, #{content})
+    </insert>
+
+    <!--게시글 상세조회-->
+    <select id="selectPost" parameterType="long" resultType="com.jscode.minseok.domain.Post">
+        SELECT id, title, content, createdat
+        FROM Post
+        WHERE id = #{value};
+    </select>
+
+    <!--게시글 전체 조회-->
+    <select id="selectPostList" resultType="com.jscode.minseok.domain.Post">
+        SELECT id, title, content, createdat
+        FROM Post
+        ORDER BY createdat DESC
+        LIMIT 100;
+    </select>
+
+    <!--게시글 검색-->
+    <select id="selectPostsByTitleContaining" parameterType="string" resultType="com.jscode.minseok.domain.Post">
+        SELECT id, title, content, createdat
+        FROM Post
+        WHERE title like CONCAT('%', #{value}, '%')
+        ORDER BY createdat DESC
+        LIMIT 100;
+    </select>
+
+    <!--게시글 수정-->
+    <update id="updatePost" parameterType="com.jscode.minseok.domain.Post">
+        UPDATE Post
+        SET title = #{title}, content = #{content}
+        WHERE id = #{id};
+    </update>
+
+    <!--게시글 삭제-->
+    <delete id="deletePost" parameterType="long">
+        DELETE FROM Post
+               WHERE id = #{value}
+    </delete>
+</mapper>
